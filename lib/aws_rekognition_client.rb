@@ -6,6 +6,7 @@ module AwsRekognitionClient
   BaseError = Class.new(StandardError)
 
   def self.configure(&block)
+    Configuration.configure(&block)
   end
 
   def self.get_labels(image_url)
