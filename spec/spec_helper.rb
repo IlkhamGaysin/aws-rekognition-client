@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
-require 'bundler/setup'
 require 'aws_rekognition_client'
-require 'climate_control'
+require 'bundler/setup'
+require 'pry'
 
 Dir[File.dirname(__FILE__).concat('/support/**/*.rb')].each { |path| require path }
 

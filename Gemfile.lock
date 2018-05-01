@@ -14,7 +14,6 @@ GEM
       bundler (~> 1.2)
       thor (~> 0.18)
     byebug (10.0.2)
-    climate_control (0.2.0)
     codeclimate-test-reporter (1.0.8)
       simplecov (<= 0.13)
     coderay (1.1.2)
@@ -80,7 +79,6 @@ DEPENDENCIES
   aws_rekognition_client!
   bundler
   bundler-audit
-  climate_control
   codeclimate-test-reporter
   dotenv
   faker
