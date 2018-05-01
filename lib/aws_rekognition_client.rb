@@ -3,6 +3,8 @@
 Dir[File.dirname(__FILE__).concat('/**/*.rb')].each { |path| require path }
 
 module AwsRekognitionClient
+  BaseError = Class.new(StandardError)
+
   def self.configure(&block)
   end
 
