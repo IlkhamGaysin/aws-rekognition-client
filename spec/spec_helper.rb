@@ -2,7 +2,6 @@
 
 require 'bundler/setup'
 require 'aws_rekognition_client'
-require 'dotenv/load'
 require 'climate_control'
 
 Dir[File.dirname(__FILE__).concat('/support/**/*.rb')].each { |path| require path }
