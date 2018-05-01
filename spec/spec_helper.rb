@@ -2,6 +2,7 @@
 
 require 'bundler/setup'
 require 'aws_rekognition_client'
+require 'dotenv/load'
 
 if ENV['CI']
   require 'simplecov'
