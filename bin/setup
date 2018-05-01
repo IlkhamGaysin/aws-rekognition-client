@@ -3,4 +3,13 @@ set -euo pipefail
 IFS=$'\n\t'
 set -vx
 
-bundle install --path=.bundle
+# Make sure we have Bundler installed
+gem install bundler --conservative
+
+# Set up configurable environment variables
+if [ ! -f .env ]; then
+  cp .env.example .env
+fi
+
+# Install required gems
+bundle check --path .bundle > /dev/null 2>&1 || bundle install --path=.bundle
