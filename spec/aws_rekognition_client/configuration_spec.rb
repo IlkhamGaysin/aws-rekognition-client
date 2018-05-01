@@ -38,4 +38,12 @@ RSpec.describe AwsRekognitionClient::Configuration do
       expect(described_class.min_confidence).to eql(50)
     end
   end
+
+  describe '.other_method' do
+    it 'raises NoMethodError error' do
+      expect {
+        described_class.other_method
+      }.to raise_error(NoMethodError)
+    end
+  end
 end
