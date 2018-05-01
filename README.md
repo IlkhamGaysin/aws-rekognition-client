@@ -1,3 +1,6 @@
+[![Build Status](https://semaphoreci.com/api/v1/ilkhamgaysin/aws-rekognition-client/branches/master/badge.svg)](https://semaphoreci.com/ilkhamgaysin/aws-rekognition-client)
+[![Maintainability](https://api.codeclimate.com/v1/badges/419feb110734a442ea40/maintainability)](https://codeclimate.com/github/IlkhamGaysin/aws-rekognition-client/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/419feb110734a442ea40/test_coverage)](https://codeclimate.com/github/IlkhamGaysin/aws-rekognition-client/test_coverage)
 # AwsRekognitionClient
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/aws_rekognition_client`. To experiment with that code, run `bin/console` for an interactive prompt.

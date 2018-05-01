@@ -2,7 +2,7 @@ AllCops:
   DisplayCopNames: true
   Exclude:
     - bin/**/*
-    - spec/**/*
+    - vendor/**/*
 
 Style/AndOr:
   Enabled: false
