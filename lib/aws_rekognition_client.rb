@@ -3,5 +3,6 @@
 Dir[File.dirname(__FILE__).concat('/**/*.rb')].each { |path| require path }
 
 module AwsRekognitionClient
-  # Your code goes here...
+  def self.get_labels(image_url)
+  end
 end
