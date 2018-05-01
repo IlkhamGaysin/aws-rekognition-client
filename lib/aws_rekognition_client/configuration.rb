@@ -33,5 +33,14 @@ module AwsRekognitionClient
     def self.url
       ENDPOINT_TEMPLATE % instance.region
     end
+
+    def self.respond_to_missing?(method, include_private = false)
+      AWS_CREDENTIAL_KEYS.include?(method) || super
+    end
+
+    def self.method_missing(method, *args)
+      super unless AWS_CREDENTIAL_KEYS.include?(method.to_s.gsub(/\=$/, '').to_sym)
+      instance.public_send(method, *args)
+    end
   end
 end
