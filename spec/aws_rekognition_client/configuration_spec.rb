@@ -20,9 +20,22 @@ RSpec.describe AwsRekognitionClient::Configuration do
       expect(described_class.secret_key).to be_nil
     end
   end
+
   describe '.region' do
     it 'returns default region' do
       expect(described_class.region).to eql('eu-west-1')
+    end
+  end
+
+  describe '.max_labels' do
+    it 'returns default max labels value' do
+      expect(described_class.max_labels).to eql(10)
+    end
+  end
+
+  describe '.min_confidence' do
+    it 'returns default min confidence value' do
+      expect(described_class.min_confidence).to eql(50)
     end
   end
 end
