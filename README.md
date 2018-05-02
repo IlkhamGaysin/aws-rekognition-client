@@ -1,4 +1,4 @@
-[![Build Status](https://semaphoreci.com/api/v1/ilkhamgaysin/aws-rekognition-client/branches/master/badge.svg)](https://semaphoreci.com/ilkhamgaysin/aws-rekognition-client)
+[![CircleCI](https://circleci.com/gh/IlkhamGaysin/aws-rekognition-client/tree/master.svg?style=svg)](https://circleci.com/gh/IlkhamGaysin/aws-rekognition-client/tree/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/419feb110734a442ea40/maintainability)](https://codeclimate.com/github/IlkhamGaysin/aws-rekognition-client/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/419feb110734a442ea40/test_coverage)](https://codeclimate.com/github/IlkhamGaysin/aws-rekognition-client/test_coverage)
 # AwsRekognitionClient
