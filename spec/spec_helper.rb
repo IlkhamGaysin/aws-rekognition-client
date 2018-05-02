@@ -1,11 +1,17 @@
 # frozen_string_literal: true
 
-require 'aws_rekognition_client'
+if ENV['CI']
+  require 'simplecov'
+  SimpleCov.start do
+    add_filter ['.bundle', 'spec', 'bin']
+    coverage_dir ENV.fetch('SEMAPHORE_CACHE_DIR', nil)
+  end
+end
+
 require 'bundler/setup'
 require 'pry'
 require 'faker'
-
-Dir[File.dirname(__FILE__).concat('/support/**/*.rb')].each { |path| require path }
+require 'aws_rekognition_client'
 
 RSpec.configure do |config|
   # Enable flags like --only-failures and --next-failure
