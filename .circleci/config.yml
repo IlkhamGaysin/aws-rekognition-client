@@ -32,3 +32,9 @@ jobs:
           name: run tests
           command: |
             bin/ci
+
+      # run code quality checks!
+      - run:
+          name: run code quality checks
+          command: |
+            bin/quality
