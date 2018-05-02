@@ -4,7 +4,7 @@ require 'spec_helper'
 
 RSpec.describe AwsRekognitionClient::Configuration do
   describe '.url' do
-    let(:instance) { double(region: 'eu-west-1') }
+    let(:instance) { instance_double(described_class, region: 'eu-west-1') }
 
     before do
       allow(described_class).to receive(:instance).and_return(instance)
@@ -17,7 +17,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
   describe '.access_key' do
     let(:access_key) { Faker::Crypto.sha1 }
-    let(:instance)   { double(access_key: access_key) }
+    let(:instance)   { instance_double(described_class, access_key: access_key) }
 
     before do
       allow(described_class).to receive(:instance).and_return(instance)
@@ -30,7 +30,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
   describe '.secret_key' do
     let(:secret_key) { Faker::Crypto.sha1 }
-    let(:instance)   { double(secret_key: secret_key) }
+    let(:instance)   { instance_double(described_class, secret_key: secret_key) }
 
     before do
       allow(described_class).to receive(:instance).and_return(instance)
@@ -43,7 +43,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
   describe '.region' do
     let(:region)   { 'eu-west-3' }
-    let(:instance) { double(region: region) }
+    let(:instance) { instance_double(described_class, region: region) }
 
     before do
       allow(described_class).to receive(:instance).and_return(instance)
@@ -56,7 +56,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
   describe '.max_labels' do
     let(:max_labels) { 20 }
-    let(:instance)   { double(max_labels: max_labels) }
+    let(:instance)   { instance_double(described_class, max_labels: max_labels) }
 
     before do
       allow(described_class).to receive(:instance).and_return(instance)
@@ -69,7 +69,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
   describe '.min_confidence' do
     let(:min_confidence) { 80 }
-    let(:instance)       { double(min_confidence: min_confidence) }
+    let(:instance)       { instance_double(described_class, min_confidence: min_confidence) }
 
     before do
       allow(described_class).to receive(:instance).and_return(instance)
@@ -82,9 +82,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
   describe '.other_method' do
     it 'raises NoMethodError error' do
-      expect {
-        described_class.other_method
-      }.to raise_error(NoMethodError)
+      expect { described_class.other_method }.to raise_error(NoMethodError)
     end
   end
 
@@ -101,9 +99,8 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
 
     it 'changes access key' do
-      expect {
-        described_class.access_key = access_key
-      }.to change(described_class, :access_key).from(nil).to(access_key)
+      expect { described_class.access_key = access_key }
+        .to change(described_class, :access_key).from(nil).to(access_key)
     end
   end
 
@@ -120,9 +117,8 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
 
     it 'changes secret key' do
-      expect {
-        described_class.secret_key = secret_key
-      }.to change(described_class, :secret_key).from(nil).to(secret_key)
+      expect { described_class.secret_key = secret_key }
+        .to change(described_class, :secret_key).from(nil).to(secret_key)
     end
   end
 
@@ -139,9 +135,8 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
 
     it 'changes region' do
-      expect {
-        described_class.region = region
-      }.to change(described_class, :region).from(nil).to(region)
+      expect { described_class.region = region }
+        .to change(described_class, :region).from(nil).to(region)
     end
   end
 
@@ -158,9 +153,8 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
 
     it 'changes max labels' do
-      expect {
-        described_class.max_labels = max_labels
-      }.to change(described_class, :max_labels).from(nil).to(max_labels)
+      expect { described_class.max_labels = max_labels }
+        .to change(described_class, :max_labels).from(nil).to(max_labels)
     end
   end
 
@@ -177,9 +171,8 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
 
     it 'changes min confidence' do
-      expect {
-        described_class.min_confidence = min_confidence
-      }.to change(described_class, :min_confidence).from(nil).to(min_confidence)
+      expect { described_class.min_confidence = min_confidence }
+        .to change(described_class, :min_confidence).from(nil).to(min_confidence)
     end
   end
 
@@ -208,9 +201,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
 
     it 'yields with instance' do
-      expect { |b|
-        described_class.configure(&b)
-      }.to yield_with_args(instance)
+      expect { |b| described_class.configure(&b) }.to yield_with_args(instance)
     end
   end
 end

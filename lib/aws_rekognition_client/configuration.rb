@@ -33,17 +33,15 @@ module AwsRekognitionClient
     end
 
     def self.respond_to_missing?(method, include_private = false)
-      has_accessor?(method) || super
+      accessor?(method) || super
     end
 
     def self.method_missing(method, *args)
-      super unless has_accessor?(method.to_s.gsub(/\=$/, '').to_sym)
+      super unless accessor?(method.to_s.gsub(/\=$/, '').to_sym)
       instance.public_send(method, *args)
     end
 
-    private
-
-    def self.has_accessor?(method)
+    def self.accessor?(method)
       ACCESSORS.include?(method)
     end
   end
