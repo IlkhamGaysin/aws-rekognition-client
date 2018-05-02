@@ -3,6 +3,7 @@
 require 'aws_rekognition_client'
 require 'bundler/setup'
 require 'pry'
+require 'faker'
 
 Dir[File.dirname(__FILE__).concat('/support/**/*.rb')].each { |path| require path }
 

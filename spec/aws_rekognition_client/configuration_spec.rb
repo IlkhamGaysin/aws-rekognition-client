@@ -4,38 +4,79 @@ require 'spec_helper'
 
 RSpec.describe AwsRekognitionClient::Configuration do
   describe '.url' do
+    let(:instance) { double(region: 'eu-west-1') }
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
     it 'returns AWS Rekognition endpoint with default region' do
       expect(described_class.url).to eql('https://rekognition.eu-west-1.amazonaws.com/')
     end
   end
 
   describe '.access_key' do
-    it 'returns Access Key' do
-      expect(described_class.access_key).to be_nil
+    let(:access_key) { Faker::Crypto.sha1 }
+    let(:instance)   { double(access_key: access_key) }
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'returns access key' do
+      expect(described_class.access_key).to eql(access_key)
     end
   end
 
   describe '.secret_key' do
-    it 'returns AWS Credentials from current environment' do
-      expect(described_class.secret_key).to be_nil
+    let(:secret_key) { Faker::Crypto.sha1 }
+    let(:instance)   { double(secret_key: secret_key) }
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'returns secret key' do
+      expect(described_class.secret_key).to eql(secret_key)
     end
   end
 
   describe '.region' do
-    it 'returns default region' do
-      expect(described_class.region).to eql('eu-west-1')
+    let(:region)   { 'eu-west-3' }
+    let(:instance) { double(region: region) }
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'returns region' do
+      expect(described_class.region).to eql(region)
     end
   end
 
   describe '.max_labels' do
-    it 'returns default max labels value' do
-      expect(described_class.max_labels).to eql(10)
+    let(:max_labels) { 20 }
+    let(:instance)   { double(max_labels: max_labels) }
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'returns max labels value' do
+      expect(described_class.max_labels).to eql(max_labels)
     end
   end
 
   describe '.min_confidence' do
-    it 'returns default min confidence value' do
-      expect(described_class.min_confidence).to eql(50)
+    let(:min_confidence) { 80 }
+    let(:instance)       { double(min_confidence: min_confidence) }
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'returns min confidence value' do
+      expect(described_class.min_confidence).to eql(min_confidence)
     end
   end
 
@@ -44,6 +85,132 @@ RSpec.describe AwsRekognitionClient::Configuration do
       expect {
         described_class.other_method
       }.to raise_error(NoMethodError)
+    end
+  end
+
+  describe '.access_key=' do
+    let(:access_key) { Faker::Crypto.sha1 }
+
+    let(:instance) do
+      fake = Class.new { attr_accessor :access_key }
+      fake.new
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'changes access key' do
+      expect {
+        described_class.access_key = access_key
+      }.to change(described_class, :access_key).from(nil).to(access_key)
+    end
+  end
+
+  describe '.secret_key=' do
+    let(:secret_key) { Faker::Crypto.sha1 }
+
+    let(:instance) do
+      fake = Class.new { attr_accessor :secret_key }
+      fake.new
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'changes secret key' do
+      expect {
+        described_class.secret_key = secret_key
+      }.to change(described_class, :secret_key).from(nil).to(secret_key)
+    end
+  end
+
+  describe '.region=' do
+    let(:region) { 'eu-west-2' }
+
+    let(:instance) do
+      fake = Class.new { attr_accessor :region }
+      fake.new
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'changes region' do
+      expect {
+        described_class.region = region
+      }.to change(described_class, :region).from(nil).to(region)
+    end
+  end
+
+  describe '.max_labels=' do
+    let(:max_labels) { 30 }
+
+    let(:instance) do
+      fake = Class.new { attr_accessor :max_labels }
+      fake.new
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'changes max labels' do
+      expect {
+        described_class.max_labels = max_labels
+      }.to change(described_class, :max_labels).from(nil).to(max_labels)
+    end
+  end
+
+  describe '.min_confidence=' do
+    let(:min_confidence) { 30 }
+
+    let(:instance) do
+      fake = Class.new { attr_accessor :min_confidence }
+      fake.new
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'changes min confidence' do
+      expect {
+        described_class.min_confidence = min_confidence
+      }.to change(described_class, :min_confidence).from(nil).to(min_confidence)
+    end
+  end
+
+  describe '.respond_to_missing?' do
+    context 'when called method is present in AwsRekognitionClient::ACCESSORS' do
+      it 'responds to method' do
+        expect(described_class).to respond_to(:access_key)
+      end
+    end
+
+    context 'when called method is not present in AwsRekognitionClient::ACCESSORS' do
+      it 'does not respond to method' do
+        expect(described_class).not_to respond_to(:other_method)
+      end
+    end
+  end
+
+  describe '.configure' do
+    let(:instance) do
+      fake = Class.new { attr_accessor :min_confidence }
+      fake.new
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    it 'yields with instance' do
+      expect { |b|
+        described_class.configure(&b)
+      }.to yield_with_args(instance)
     end
   end
 end

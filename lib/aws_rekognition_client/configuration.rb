@@ -8,7 +8,7 @@ module AwsRekognitionClient
 
     ENDPOINT_TEMPLATE = 'https://rekognition.%s.amazonaws.com/'
 
-    AWS_CREDENTIAL_KEYS = %i(
+    ACCESSORS = %i(
       access_key
       secret_key
       region
@@ -16,7 +16,7 @@ module AwsRekognitionClient
       min_confidence
     ).freeze
 
-    attr_accessor(*AWS_CREDENTIAL_KEYS)
+    attr_accessor(*ACCESSORS)
 
     def initialize
       @region         = 'eu-west-1'
@@ -33,12 +33,18 @@ module AwsRekognitionClient
     end
 
     def self.respond_to_missing?(method, include_private = false)
-      AWS_CREDENTIAL_KEYS.include?(method) || super
+      has_accessor?(method) || super
     end
 
     def self.method_missing(method, *args)
-      super unless AWS_CREDENTIAL_KEYS.include?(method.to_s.gsub(/\=$/, '').to_sym)
+      super unless has_accessor?(method.to_s.gsub(/\=$/, '').to_sym)
       instance.public_send(method, *args)
+    end
+
+    private
+
+    def self.has_accessor?(method)
+      ACCESSORS.include?(method)
     end
   end
 end
