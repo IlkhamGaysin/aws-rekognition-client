@@ -3,7 +3,7 @@
 require 'spec_helper'
 
 RSpec.describe AwsRekognitionClient::AwsCredentialsValidator do
-  describe '.validate!' do
+  describe '.validate' do
     context 'when access key is blank' do
       let(:instance) do
         instance_double(AwsRekognitionClient::Configuration, access_key: nil, secret_key: Faker::Crypto.sha1)
@@ -14,7 +14,7 @@ RSpec.describe AwsRekognitionClient::AwsCredentialsValidator do
       end
 
       it 'raises BaseError' do
-        expect { described_class.validate! }
+        expect { described_class.validate }
           .to raise_error(AwsRekognitionClient::BaseError, 'AWS Access Key must be present')
       end
     end
@@ -29,7 +29,7 @@ RSpec.describe AwsRekognitionClient::AwsCredentialsValidator do
       end
 
       it 'raises BaseError' do
-        expect { described_class.validate! }
+        expect { described_class.validate }
           .to raise_error(AwsRekognitionClient::BaseError, 'AWS Secret Key must be present')
       end
     end
@@ -47,7 +47,7 @@ RSpec.describe AwsRekognitionClient::AwsCredentialsValidator do
       end
 
       it 'raises BaseError' do
-        expect { described_class.validate! }
+        expect { described_class.validate }
           .to raise_error(AwsRekognitionClient::BaseError, 'AWS region must be present')
       end
     end

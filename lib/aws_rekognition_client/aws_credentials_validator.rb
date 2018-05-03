@@ -8,7 +8,11 @@ module AwsRekognitionClient
       region: 'AWS region must be present'
     }.freeze
 
-    def self.validate!
+    def self.validate
+      new.validate
+    end
+
+    def validate
       VALIDATIONS_MAP.each do |key, message|
         raise BaseError, message if Configuration.public_send(key).to_s.empty?
       end
