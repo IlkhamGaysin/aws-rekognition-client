@@ -4,7 +4,6 @@ AllCops:
   DisplayCopNames: true
   Exclude:
     - bin/**/*
-    - vendor/**/*
 
 Style/AndOr:
   Enabled: false
