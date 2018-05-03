@@ -12,4 +12,4 @@ if [ ! -f .env ]; then
 fi
 
 # Install required gems
-bundle check --path vendor/bundle > /dev/null 2>&1 || bundle install --jobs=4 --retry=3 --path=vendor/bundle
+bundle check --path .bundle > /dev/null 2>&1 || bundle install --jobs=4 --retry=3 --path=.bundle

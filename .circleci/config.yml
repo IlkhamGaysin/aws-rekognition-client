@@ -24,7 +24,7 @@ jobs:
 
       - save_cache:
           paths:
-            - ./vendor/bundle
+            - ./bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       # run tests!
