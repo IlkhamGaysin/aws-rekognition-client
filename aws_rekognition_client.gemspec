@@ -1,9 +1,8 @@
-
 # frozen_string_literal: true
 
 lib = File.expand_path('lib', __dir__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'aws_rekognition_client'
+require 'aws_rekognition_client/version'
 
 Gem::Specification.new do |spec|
   spec.name          = 'aws_rekognition_client'
