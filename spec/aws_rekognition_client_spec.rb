@@ -8,15 +8,10 @@ RSpec.describe AwsRekognitionClient do
   end
 
   describe '.configure' do
-    let(:instance) { instance_double(AwsRekognitionClient::Configuration) }
-
-    before do
-      allow(AwsRekognitionClient::Configuration).to receive(:instance).and_return(instance)
-    end
-
     it 'calls configure on AwsRekognitionClient::Configuration' do
-      expect(AwsRekognitionClient::Configuration).to receive(:configure)
+      allow(AwsRekognitionClient::Configuration).to receive(:configure)
       described_class.configure {}
+      expect(AwsRekognitionClient::Configuration).to have_received(:configure)
     end
   end
 end

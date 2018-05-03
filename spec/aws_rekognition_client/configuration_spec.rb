@@ -78,7 +78,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
     context 'when instance is not mocked' do
       it 'returns default max labels value' do
-        expect(described_class.max_labels).to eql(10)
+        expect(described_class.max_labels).to be(10)
       end
     end
   end
@@ -99,7 +99,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
     context 'when instance is not mocked' do
       it 'returns default min confidence value' do
-        expect(described_class.min_confidence).to eql(50)
+        expect(described_class.min_confidence).to be(50)
       end
     end
   end
