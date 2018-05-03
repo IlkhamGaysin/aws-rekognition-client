@@ -10,7 +10,7 @@ module AwsRekognitionClient
 
     def self.validate!
       VALIDATIONS_MAP.each do |key, message|
-        raise BaseError, message if Configuration.public_send(key).empty?
+        raise BaseError, message if Configuration.public_send(key).to_s.empty?
       end
     end
   end
