@@ -34,4 +34,4 @@ jobs:
       - run:
           name: send test coverage to Code Climate
           command: |
-            bin/codeclimate-test-reporter
+            bin/codeclimate-test-reporter '.coverage/.resultset.json'
