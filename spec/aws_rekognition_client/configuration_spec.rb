@@ -42,41 +42,65 @@ RSpec.describe AwsRekognitionClient::Configuration do
   end
 
   describe '.region' do
-    let(:region)   { 'eu-west-3' }
-    let(:instance) { instance_double(described_class, region: region) }
+    context 'when instance is mocked' do
+      let(:region)   { 'eu-west-3' }
+      let(:instance) { instance_double(described_class, region: region) }
 
-    before do
-      allow(described_class).to receive(:instance).and_return(instance)
+      before do
+        allow(described_class).to receive(:instance).and_return(instance)
+      end
+
+      it 'returns region' do
+        expect(described_class.region).to eql(region)
+      end
     end
 
-    it 'returns region' do
-      expect(described_class.region).to eql(region)
+    context 'when instance is not mocked' do
+      it 'returns default region' do
+        expect(described_class.region).to eql('eu-west-1')
+      end
     end
   end
 
   describe '.max_labels' do
-    let(:max_labels) { 20 }
-    let(:instance)   { instance_double(described_class, max_labels: max_labels) }
+    context 'when instance is mocked' do
+      let(:max_labels) { 20 }
+      let(:instance)   { instance_double(described_class, max_labels: max_labels) }
 
-    before do
-      allow(described_class).to receive(:instance).and_return(instance)
+      before do
+        allow(described_class).to receive(:instance).and_return(instance)
+      end
+
+      it 'returns max labels value' do
+        expect(described_class.max_labels).to eql(max_labels)
+      end
     end
 
-    it 'returns max labels value' do
-      expect(described_class.max_labels).to eql(max_labels)
+    context 'when instance is not mocked' do
+      it 'returns default max labels value' do
+        expect(described_class.max_labels).to eql(10)
+      end
     end
   end
 
   describe '.min_confidence' do
-    let(:min_confidence) { 80 }
-    let(:instance)       { instance_double(described_class, min_confidence: min_confidence) }
+    context 'when instance is mocked' do
+      let(:min_confidence) { 80 }
+      let(:instance)       { instance_double(described_class, min_confidence: min_confidence) }
 
-    before do
-      allow(described_class).to receive(:instance).and_return(instance)
+      before do
+        allow(described_class).to receive(:instance).and_return(instance)
+      end
+
+      it 'returns min confidence value' do
+        expect(described_class.min_confidence).to eql(min_confidence)
+      end
     end
 
-    it 'returns min confidence value' do
-      expect(described_class.min_confidence).to eql(min_confidence)
+    context 'when instance is not mocked' do
+      it 'returns default min confidence value' do
+        expect(described_class.min_confidence).to eql(50)
+      end
     end
   end
 
