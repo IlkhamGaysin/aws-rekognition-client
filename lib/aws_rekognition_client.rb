@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'faraday'
+require 'json'
+
 Dir[File.dirname(__FILE__).concat('/**/*.rb')].each { |path| require path }
 
 module AwsRekognitionClient
