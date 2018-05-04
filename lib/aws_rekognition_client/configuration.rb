@@ -12,16 +12,12 @@ module AwsRekognitionClient
       access_key
       secret_key
       region
-      max_labels
-      min_confidence
     ).freeze
 
     attr_accessor(*ACCESSORS)
 
     def initialize
-      @region         = 'eu-west-1'
-      @max_labels     = 10
-      @min_confidence = 50
+      @region = 'eu-west-1'
     end
 
     def self.configure

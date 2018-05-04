@@ -62,48 +62,6 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
   end
 
-  describe '.max_labels' do
-    context 'when instance is mocked' do
-      let(:max_labels) { 20 }
-      let(:instance)   { instance_double(described_class, max_labels: max_labels) }
-
-      before do
-        allow(described_class).to receive(:instance).and_return(instance)
-      end
-
-      it 'returns max labels value' do
-        expect(described_class.max_labels).to eql(max_labels)
-      end
-    end
-
-    context 'when instance is not mocked' do
-      it 'returns default max labels value' do
-        expect(described_class.max_labels).to be(10)
-      end
-    end
-  end
-
-  describe '.min_confidence' do
-    context 'when instance is mocked' do
-      let(:min_confidence) { 80 }
-      let(:instance)       { instance_double(described_class, min_confidence: min_confidence) }
-
-      before do
-        allow(described_class).to receive(:instance).and_return(instance)
-      end
-
-      it 'returns min confidence value' do
-        expect(described_class.min_confidence).to eql(min_confidence)
-      end
-    end
-
-    context 'when instance is not mocked' do
-      it 'returns default min confidence value' do
-        expect(described_class.min_confidence).to be(50)
-      end
-    end
-  end
-
   describe '.other_method' do
     it 'raises NoMethodError error' do
       expect { described_class.other_method }.to raise_error(NoMethodError)

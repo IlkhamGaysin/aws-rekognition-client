@@ -44,6 +44,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec'
   spec.add_development_dependency 'vcr'
 
-  spec.add_dependency 'aws4', '0.0.2'
-  spec.add_dependency 'faraday', '0.13.1'
+  spec.add_dependency 'aws4', '~> 0.0.2'
+  spec.add_dependency 'faraday', '~> 0.13.1'
+  spec.add_dependency 'mini_magick', '~> 4.8.0'
 end
