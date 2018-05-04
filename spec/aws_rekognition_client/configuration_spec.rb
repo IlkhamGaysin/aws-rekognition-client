@@ -122,42 +122,6 @@ RSpec.describe AwsRekognitionClient::Configuration do
     end
   end
 
-  describe '.max_labels=' do
-    let(:max_labels) { 30 }
-
-    let(:instance) do
-      fake = Class.new { attr_accessor :max_labels }
-      fake.new
-    end
-
-    before do
-      allow(described_class).to receive(:instance).and_return(instance)
-    end
-
-    it 'changes max labels' do
-      expect { described_class.max_labels = max_labels }
-        .to change(described_class, :max_labels).from(nil).to(max_labels)
-    end
-  end
-
-  describe '.min_confidence=' do
-    let(:min_confidence) { 30 }
-
-    let(:instance) do
-      fake = Class.new { attr_accessor :min_confidence }
-      fake.new
-    end
-
-    before do
-      allow(described_class).to receive(:instance).and_return(instance)
-    end
-
-    it 'changes min confidence' do
-      expect { described_class.min_confidence = min_confidence }
-        .to change(described_class, :min_confidence).from(nil).to(min_confidence)
-    end
-  end
-
   describe '.respond_to_missing?' do
     context 'when called method is present in AwsRekognitionClient::ACCESSORS' do
       it 'responds to method' do
