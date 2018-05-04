@@ -5,8 +5,10 @@ require_relative 'image_validator/mime_type_validator'
 
 module AwsRekognitionClient
   class ImageValidator
-    VALIDATOR_CLASSES = [AwsRekognitionClient::ImageValidator::ImageSizeValidator,
-                          AwsRekognitionClient::ImageValidator::MimeTypeValidator].freeze
+    VALIDATOR_CLASSES = [
+      AwsRekognitionClient::ImageValidator::ImageSizeValidator,
+      AwsRekognitionClient::ImageValidator::MimeTypeValidator
+    ].freeze
 
     def initialize(image)
       @image = image

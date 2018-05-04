@@ -4,7 +4,7 @@ PATH
     aws_rekognition_client (0.1.0)
       aws4 (~> 0.0.2)
       faraday (~> 0.13.1)
-      mini_magick
+      mini_magick (~> 4.8.0)
 
 GEM
   remote: https://rubygems.org/

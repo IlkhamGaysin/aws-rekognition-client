@@ -5,7 +5,7 @@ require_relative 'base_validator'
 module AwsRekognitionClient
   class ImageValidator
     class ImageSizeValidator < AwsRekognitionClient::ImageValidator::BaseValidator
-      MAX_SIZE = 5_000_000 #Kb
+      MAX_SIZE = 5_000_000 # bytes
 
       def validate
         return @valid = true if @image.size < MAX_SIZE
@@ -14,7 +14,7 @@ module AwsRekognitionClient
       end
 
       def message
-        'Amazon Rekognition accept maximum image size is %s MB' % MAX_SIZE/1_000_000
+        "Amazon Rekognition accept maximum image size is #{MAX_SIZE / 1_000_000} MB"
       end
     end
   end
