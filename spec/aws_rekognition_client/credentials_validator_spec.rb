@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-RSpec.describe AwsRekognitionClient::AwsCredentialsValidator do
+RSpec.describe AwsRekognitionClient::CredentialsValidator do
   describe '.validate' do
     context 'when access key is blank' do
       let(:instance) do

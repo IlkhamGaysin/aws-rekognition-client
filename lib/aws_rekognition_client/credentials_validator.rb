@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module AwsRekognitionClient
-  class AwsCredentialsValidator
+  class CredentialsValidator
     VALIDATIONS_MAP = {
       access_key: 'AWS Access Key must be present',
       secret_key: 'AWS Secret Key must be present',
@@ -13,8 +13,8 @@ module AwsRekognitionClient
     end
 
     def validate
-      VALIDATIONS_MAP.each do |key, message|
-        raise BaseError, message if Configuration.public_send(key).to_s.empty?
+      Configuration.credentials.each do |key, value|
+        raise BaseError, VALIDATIONS_MAP[key] if value.to_s.empty?
       end
     end
   end

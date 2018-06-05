@@ -8,13 +8,13 @@ module AwsRekognitionClient
 
     ENDPOINT_TEMPLATE = 'https://rekognition.%s.amazonaws.com/'
 
-    ACCESSORS = %i(
+    CREDENTIALS = %i(
       access_key
       secret_key
       region
     ).freeze
 
-    attr_accessor(*ACCESSORS)
+    attr_accessor(*CREDENTIALS)
 
     def initialize
       @region = 'eu-west-1'
@@ -28,6 +28,12 @@ module AwsRekognitionClient
       ENDPOINT_TEMPLATE % instance.region
     end
 
+    def credentials
+      CREDENTIALS.reduce({}) do |hash, credential|
+        hash[credential] = public_send(credential)
+      end
+    end
+
     def self.respond_to_missing?(method, include_private = false)
       accessor?(method) || super
     end
@@ -38,7 +44,7 @@ module AwsRekognitionClient
     end
 
     def self.accessor?(method)
-      ACCESSORS.include?(method)
+      CREDENTIALS.include?(method)
     end
   end
 end

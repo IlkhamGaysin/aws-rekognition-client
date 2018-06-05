@@ -2,6 +2,9 @@
 
 require 'faraday'
 require 'json'
+require 'dry-types'
+require 'dry-struct'
+require 'aws_rekognition_client/types'
 
 Dir[File.dirname(__FILE__).concat('/**/*.rb')].each { |path| require path }
 

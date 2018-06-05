@@ -123,13 +123,13 @@ RSpec.describe AwsRekognitionClient::Configuration do
   end
 
   describe '.respond_to_missing?' do
-    context 'when called method is present in AwsRekognitionClient::ACCESSORS' do
+    context 'when called method is present in AwsRekognitionClient::CREDENTIALS' do
       it 'responds to method' do
         expect(described_class).to respond_to(:access_key)
       end
     end
 
-    context 'when called method is not present in AwsRekognitionClient::ACCESSORS' do
+    context 'when called method is not present in AwsRekognitionClient::CREDENTIALS' do
       it 'does not respond to method' do
         expect(described_class).not_to respond_to(:other_method)
       end

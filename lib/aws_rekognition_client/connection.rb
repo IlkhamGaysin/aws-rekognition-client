@@ -12,7 +12,7 @@ module AwsRekognitionClient
     end
 
     def post(url, body, headers)
-      @connection.post(url, body.to_json, headers)
+      @connection.post(url, body, headers)
     end
   end
 end

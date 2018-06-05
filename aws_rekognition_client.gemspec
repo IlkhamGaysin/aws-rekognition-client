@@ -47,4 +47,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'aws4', '~> 0.0.2'
   spec.add_dependency 'faraday', '~> 0.13.1'
   spec.add_dependency 'mini_magick', '~> 4.8.0'
+  spec.add_dependency 'dry-types', '~> 0.13.0'
+  spec.add_dependency 'dry-struct', '~> 0.5.0'
 end
