@@ -8,7 +8,6 @@ jobs:
     parallelism: 2
     docker:
       - image: circleci/ruby:2.6.6-node-browsers
-      - image: v4tech/imagemagick
 
     environment:
       COVERAGE_DIR: ./coverage
