@@ -42,6 +42,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop-rspec'
   spec.add_development_dependency 'vcr'
   spec.add_development_dependency 'simplecov', '~> 0.17.1'
+  spec.add_development_dependency 'rspec_junit_formatter'
 
   spec.add_dependency 'aws4', '~> 0.0.2'
   spec.add_dependency 'faraday', '~> 0.13.1'
