@@ -15,6 +15,7 @@ module AwsRekognitionClient
     Configuration.configure(&block)
   end
 
-  def self.get_labels(image_url)
+  def self.get_labels_for(file)
+    DetectLabels::From.call(file)
   end
 end

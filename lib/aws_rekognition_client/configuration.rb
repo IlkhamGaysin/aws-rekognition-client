@@ -28,9 +28,10 @@ module AwsRekognitionClient
       ENDPOINT_TEMPLATE % instance.region
     end
 
-    def credentials
-      CREDENTIALS.reduce({}) do |hash, credential|
-        hash[credential] = public_send(credential)
+    def self.credentials
+      CREDENTIALS.reduce({}) do |memo, credential|
+        memo[credential] = public_send(credential)
+        memo
       end
     end
 
@@ -40,6 +41,7 @@ module AwsRekognitionClient
 
     def self.method_missing(method, *args)
       super unless accessor?(method.to_s.gsub(/\=$/, '').to_sym)
+
       instance.public_send(method, *args)
     end
 

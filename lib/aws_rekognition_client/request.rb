@@ -9,10 +9,10 @@ module AwsRekognitionClient
       @body       = body
       @type       = 'POST'
       @connection = Connection.new
-      @uri        = URI(Configuration.url)
+      @uri        = Configuration.url
       @headers    = {
         'Content-Type' => 'application/x-amz-json-1.1',
-        'X-Amz-Target' => "RekognitionService.#{request.target}"
+        'X-Amz-Target' => "RekognitionService.#{target}"
       }
     end
 
@@ -20,8 +20,9 @@ module AwsRekognitionClient
       CredentialsValidator.validate
 
       signed_headers = Signer.sign(self)
+
       begin
-        @connection.post(uri.to_s, body, signed_headers)
+        @connection.post(uri, body, signed_headers)
       rescue Faraday::Error => e
         raise BaseError, e.message
       end
