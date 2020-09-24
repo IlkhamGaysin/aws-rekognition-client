@@ -3,8 +3,9 @@
 if ENV['CI']
   require 'simplecov'
   SimpleCov.start do
-    add_filter ['.bundle', 'spec', 'bin']
+    add_filter ['.bundle', '.coverage', 'spec', 'bin']
     coverage_dir '.coverage'
+    coverage_dir ENV.fetch('COVERAGE_DIR', '.coverage')
   end
 end
 
@@ -14,13 +15,17 @@ require 'faker'
 require 'aws_rekognition_client'
 
 RSpec.configure do |config|
-  # Enable flags like --only-failures and --next-failure
   config.example_status_persistence_file_path = '.rspec_status'
-
-  # Disable RSpec exposing methods globally on `Module` and `main`
   config.disable_monkey_patching!
+
+  config.order = :random
 
   config.expect_with :rspec do |c|
     c.syntax = :expect
+  end
+
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = :expect
+    mocks.verify_partial_doubles = true
   end
 end

@@ -1,37 +1,80 @@
-version: 2
+version: 2.1
+orbs:
+  ruby: circleci/ruby@1.1.0
+  heroku: circleci/heroku@1.2.2
+
 jobs:
-  build:
+  tests:
+    parallelism: 2
     docker:
-      - image: circleci/ruby:2.5.1-node-browsers
+      - image: circleci/ruby:2.6.6-node-browsers
 
-    working_directory: ~/aws_rekognition_client
+    environment:
+      COVERAGE_DIR: ./coverage
 
+    executor: ruby/default
     steps:
       - checkout
+      - ruby/install-deps
 
       - restore_cache:
           keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          - v1-dependencies-
+            - code-climate-reporter-v1
 
       - run:
-          name: install dependencies
-          command: bin/setup
+          name:  Download cc-test-reporter
+          command: |
+            if ! [ -f ./cc-test-reporter ]; then
+              curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+              chmod +x ./cc-test-reporter
+            fi
 
       - save_cache:
+          key: code-climate-reporter-v1
           paths:
-            - ./bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - ./cc-test-reporter
 
       - run:
-          name: run tests
-          command: bin/ci
+          name: Prepare Code Climate Reporter
+          command: ./cc-test-reporter before-build
+
+      - ruby/rspec-test
 
       - run:
-          name: run code quality checks
+          name: Code Climate Test Coverage
+          command: |
+            ./cc-test-reporter format-coverage -t simplecov -o "$COVERAGE_DIR/codeclimate.$CIRCLE_NODE_INDEX.json"
+
+      - persist_to_workspace:
+          root: ./
+          paths:
+            - coverage/**
+            - cc-test-reporter
+
+      - run:
+          name: Run quality checks
           command: bin/quality
 
+  upload-coverage:
+    docker:
+    - image: circleci/ruby:2.6.6-node
+    steps:
+      - checkout
+
+      - attach_workspace:
+          at: .
       - run:
-          name: send test coverage to Code Climate
           command: |
-            bin/codeclimate-test-reporter '.coverage/.resultset.json'
+            ./cc-test-reporter sum-coverage --output - ./coverage/codeclimate.*.json | ./cc-test-reporter upload-coverage --debug --input -
+
+workflows:
+  CD:
+    jobs:
+      - tests
+      - upload-coverage:
+          requires:
+            - tests
+          # filters:
+          #   branches:
+          #     only:
+          #       - master

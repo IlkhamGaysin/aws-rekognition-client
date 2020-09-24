@@ -50,7 +50,7 @@ RSpec.describe AwsRekognitionClient::Configuration do
         allow(described_class).to receive(:instance).and_return(instance)
       end
 
-      it 'returns region' do
+      it 'returns mocked region' do
         expect(described_class.region).to eql(region)
       end
     end
@@ -148,6 +148,25 @@ RSpec.describe AwsRekognitionClient::Configuration do
 
     it 'yields with instance' do
       expect { |b| described_class.configure(&b) }.to yield_with_args(instance)
+    end
+  end
+
+  describe '.credentials' do
+    let(:instance) do
+      instance_double(described_class,
+        access_key: Faker::Crypto.sha1,
+        secret_key: Faker::Crypto.sha1,
+        region: 'eu-west-1')
+    end
+
+    before do
+      allow(described_class).to receive(:instance).and_return(instance)
+    end
+
+    subject(:credentials) { described_class.credentials }
+
+    it "returns #{AwsRekognitionClient::Configuration::CREDENTIALS} keys with values in hash" do
+      expect(credentials).to eql(access_key: instance.access_key, secret_key: instance.secret_key, region: instance.region)
     end
   end
 end
